@@ -1,9 +1,9 @@
 # Máquina de Estados em C – Pedido de E-commerce
-Trabalho Prático – Sistemas Computacionais.
+Trabalho Prático – Análise de Algoritmos.
 
 ## Estrutura
-- `include/maquina_pedido.h` – API pública (estados, eventos, `Pedido`)
-- `src/maquina_pedido.c` – implementação (tabela de transições)
+- `include/maquina_estado.h` – API pública (estados, eventos, pedido)
+- `src/maquina_estado.c` – implementação (tabela de transições)
 - `tests/test_maquina.c` – testes automatizados de estados, transições e caminhos
 - `tests/mini_test.h` – mini-framework de testes (sem dependências externas)
 
