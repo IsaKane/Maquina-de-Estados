@@ -1,0 +1,5 @@
+test_maquina
+test_maquina_san
+*.gcda
+*.gcno
+*.gcov
