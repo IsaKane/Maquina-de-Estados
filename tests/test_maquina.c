@@ -1,8 +1,8 @@
 #include <string.h>
-#include "maquina_pedido.h"
+#include "maquina_estado.h"
 #include "mini_test.h"
 
-/* ---------- Auxiliares ---------- */
+/* Auxiliares */
 /* Eventos do caminho mais curto até cada estado */
 static const Evento ROTA[N_ESTADOS][4] = {
     /* CRIADO       */ {0},
@@ -14,7 +14,7 @@ static const Evento ROTA[N_ESTADOS][4] = {
 };
 static const int TAM_ROTA[N_ESTADOS] = {0, 1, 2, 3, 4, 1};
 
-/* Leva um pedido ao estado desejado; retorna 1 se conseguiu. */
+/* Leva um pedido ao estado desejado, retorna 1 se conseguiu. */
 static int pedido_em(Pedido *p, Estado alvo) {
     pedido_init(p);
     for (int i = 0; i < TAM_ROTA[alvo]; i++) {
@@ -23,7 +23,7 @@ static int pedido_em(Pedido *p, Estado alvo) {
     return p->estado == alvo;
 }
 
-/* ---------- Testes de ESTADOS (13 casos) ---------- */
+/* Testes de ESTADOS (13 casos) */
 static void testes_de_estados(void) {
     Pedido p;
     pedido_init(&p);
@@ -49,7 +49,7 @@ static void testes_de_estados(void) {
              "estado_intermediario_nao_e_final[%s]", nome_estado(inter[i]));
 }
 
-/* ---------- Testes de TRANSIÇÕES (36 casos) ---------- */
+/* Testes de TRANSIÇÕES (36 casos) */
 static int eh_valida(int s, int e) { return transicao_destino((Estado)s, (Evento)e) != -1; }
 
 static void testes_de_transicoes(void) {
@@ -75,7 +75,7 @@ static void testes_de_transicoes(void) {
             if (!eh_valida(s, e)) invalidas++;
     caso(validas == 7 && invalidas == 23, "quantidade_de_transicoes[7 validas, 23 invalidas]");
 
-    /* 23 transições inválidas: erro e estado/histórico preservados */
+    /* 23 transições inválidas: erro e estado preservados */
     for (int s = 0; s < N_ESTADOS; s++)
         for (int e = 0; e < N_EVENTOS; e++) {
             if (eh_valida(s, e)) continue;
@@ -97,7 +97,7 @@ static void testes_de_transicoes(void) {
         caso(ok, "cancelamento_estorno[%s -> estorno=%d]", nome_estado(ce[i].origem), ce[i].estorno);
     }
 
-    /* Robustez: argumentos inválidos */
+    /* Argumentos inválidos */
     caso(pedido_disparar(0, EV_PAGAR) == ERRO_ARGUMENTO_INVALIDO, "robustez_pedido_nulo");
     caso(transicao_destino((Estado)-1, EV_PAGAR) == -1
              && transicao_destino(N_ESTADOS, EV_PAGAR) == -1
@@ -110,7 +110,7 @@ static void testes_de_transicoes(void) {
          "robustez_enums_fora_do_intervalo");
 }
 
-/* ---------- Testes de CAMINHOS independentes (6 casos, V(G) = 4) ---------- */
+/* Testes de CAMINHOS independentes (6 casos, V(G) = 4) */
 typedef struct {
     const char *nome;
     int n;

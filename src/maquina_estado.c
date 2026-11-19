@@ -1,4 +1,4 @@
-#include "maquina_pedido.h"
+#include "maquina_estado.h"
 
 #define X (-1) /* transição inválida */
 

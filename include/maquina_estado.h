@@ -1,5 +1,5 @@
-#ifndef MAQUINA_PEDIDO_H
-#define MAQUINA_PEDIDO_H
+#ifndef MAQUINA_ESTADO_H
+#define MAQUINA_ESTADO_H
 
 /* Máquina de estados de um Pedido de e-commerce. */
 
@@ -44,10 +44,10 @@ void pedido_init(Pedido *p);
 /* Dispara um evento. Em caso de erro, o pedido permanece inalterado. */
 Resultado pedido_disparar(Pedido *p, Evento ev);
 
-/* Retorna o estado destino de (origem, ev) ou -1 se a transição é inválida. */
+/* Retorna o estado destino de origem, ev ou -1 se a transição é inválida. */
 int transicao_destino(Estado origem, Evento ev);
 
-/* 1 se o estado é final (ENTREGUE ou CANCELADO), 0 caso contrário. */
+/* 1 se o estado é final, ENTREGUE ou CANCELADO, 0 caso contrário. */
 int estado_final(Estado e);
 
 const char *nome_estado(Estado e);
